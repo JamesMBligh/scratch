@@ -1,0 +1,40 @@
+:root {
+  color-scheme: dark;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  --bg: #0e0d12;
+  --panel: #181620;
+  --panel-2: #221f2c;
+  --ink: #e8e4d8;
+  --ink-dim: #a8a294;
+  --accent: #c89a4a;
+  --accent-dim: #6b5530;
+  --hot: #f0c060;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: var(--panel-2);
+  border: 1px solid var(--accent-dim);
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--accent);
+  color: var(--hot);
+}
