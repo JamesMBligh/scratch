@@ -10,6 +10,10 @@ const props = defineProps<{
   adventure: Adventure;
 }>();
 
+defineEmits<{
+  (e: 'exit'): void;
+}>();
+
 ensureBuiltInsRegistered();
 
 const engine = shallowRef<GameEngine>(new GameEngine(props.adventure));
@@ -30,6 +34,9 @@ onMounted(() => {
 <template>
   <div class="game">
     <header class="game-header">
+      <button class="back" type="button" @click="$emit('exit')" aria-label="Back to menu">
+        ← Menu
+      </button>
       <h1>{{ adventure.title }}</h1>
       <span v-if="adventure.author" class="author">by {{ adventure.author }}</span>
     </header>
@@ -60,6 +67,12 @@ onMounted(() => {
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
+}
+
+.back {
+  align-self: center;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.6rem;
 }
 
 .game-header h1 {

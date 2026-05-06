@@ -1,12 +1,28 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, shallowRef } from 'vue';
 import type { Adventure } from './types';
+import StartPage from './components/StartPage.vue';
 import AdventureGame from './components/AdventureGame.vue';
-import cabin from './adventures/cabin.json';
 
-const adventure = ref<Adventure>(cabin as Adventure);
+const activeAdventure = shallowRef<Adventure | null>(null);
+const sessionKey = ref(0);
+
+function handleStart(adventure: Adventure) {
+  activeAdventure.value = adventure;
+  sessionKey.value += 1;
+}
+
+function handleExit() {
+  activeAdventure.value = null;
+}
 </script>
 
 <template>
-  <AdventureGame :adventure="adventure" />
+  <StartPage v-if="!activeAdventure" @start="handleStart" />
+  <AdventureGame
+    v-else
+    :key="sessionKey"
+    :adventure="activeAdventure"
+    @exit="handleExit"
+  />
 </template>
