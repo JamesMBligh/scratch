@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import type { GameEngine } from '../engine/engine';
+import { SCENE_HEIGHT, SCENE_WIDTH } from '../engine/layout';
 import type { SceneObject } from '../types';
 import SceneObjectView from './SceneObjectView.vue';
 
@@ -34,7 +35,10 @@ function handleHover(obj: SceneObject) {
 </script>
 
 <template>
-  <div class="scene" :style="backgroundStyle">
+  <div
+    class="scene"
+    :style="{ width: `${SCENE_WIDTH}px`, height: `${SCENE_HEIGHT}px`, ...backgroundStyle }"
+  >
     <div class="scene-frame">
       <SceneObjectView
         v-for="obj in objects"
@@ -51,8 +55,7 @@ function handleHover(obj: SceneObject) {
 <style scoped>
 .scene {
   position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
+  flex: 0 0 auto;
   background-color: #1a1722;
   border: 1px solid var(--accent-dim);
   overflow: hidden;
